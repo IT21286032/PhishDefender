@@ -118,22 +118,23 @@ if st.button('Check!'):
     selected_model = models[choice]
 
     try:
-
-        # Perform the necessary processing and make predictions using the selected model
-        # (Replace this part with your actual processing logic using the selected model)
-        result = selected_model.predict(url)  # Replace 'url' with the processed input data
-
+        # Extract features from the URL
         url_features = featureExtraction(url)
-        df = pd.DataFrame([url_features], columns=feature_names).reshape(1, -1)
-
-        result = selected_model.predict(df)
+        
+        # Ensure the extracted features match the expected number of features
+        if len(url_features) != len(feature_names):
+            st.error(f"Feature mismatch! Expected {len(feature_names)} features but got {len(url_features)}")
+            return
+        
+        # Convert to DataFrame
+        df = pd.DataFrame([url_features], columns=feature_names)
+        
+        # Make prediction using the selected model
+        result = selected_model.predict(df.values)
 
         if result == 0:
             st.success("This web page seems legitimate!")
         else:
             st.warning("Attention! This web page is a potential phishing site!")
     except Exception as e:
-
-        st.error(f"An error occurred: {e}")
-
         st.error(f"An error occurred while processing the URL: {e}")
