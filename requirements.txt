@@ -1,2 +1,2 @@
-streamlit==1.10.0
-joblib==1.1.0
+streamlit
+joblib
