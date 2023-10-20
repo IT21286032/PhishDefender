@@ -24,9 +24,9 @@ def load_models():
     # Model file names
     model_file_names = [
         'AutoEncoder_model.pkl',
-        'Decision_Tree_model.pkl',
-        'Multilayer_Perceptrons_model.pkl',
-        'Random_Forest_model.pkl',
+        'Decision Tree_model.pkl',
+        'Multilayer Perceptrons_model.pkl',
+        'Random Forest_model.pkl',
         'SVM_model.pkl',
         'XGBoost_model.pkl'
     ]
