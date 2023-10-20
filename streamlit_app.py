@@ -93,6 +93,14 @@ choice = st.selectbox("Please select your machine learning model",
 st.write(f'{choice} is selected')
 
 # Check if a URL is phishing or legitimate
+
+feature_names = ['length_url', 'ip', 'nb_at', 'https_token', 'nb_subdomains',
+                 'prefix_suffix', 'shortening_service', 'nb_redirection',
+                 'nb_external_redirection', 'iframe', 'onmouseover', 'right_clic',
+                 'web_traffic', 'dns_record', 'status']
+
+
+# Check if a URL is phishing or legitimate
 url = st.text_input('Enter the URL')
 if st.button('Check!'):
     # Load the selected model
@@ -100,12 +108,12 @@ if st.button('Check!'):
 
     try:
         # Extract features from the provided URL
-        extracted_features = [featureExtraction(url)]
+        url_features = featureExtraction(url)
+        df = pd.DataFrame([url_features], columns=feature_names)
         
-        # Make predictions using the selected model with the extracted features
-        result = selected_model.predict(extracted_features)
-        
-        if result[0] == 0:
+        # Predict using the selected model
+        result = selected_model.predict(df)  
+        if result == 0:
             st.success("This web page seems legitimate!")
         else:
             st.warning("Attention! This web page is a potential phishing site!")
