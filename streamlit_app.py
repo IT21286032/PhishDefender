@@ -1,8 +1,8 @@
 
 import streamlit as st
 import subprocess
+import joblib
 import os
-#from Refactored_Feature_extraction_Kajee import extract_features
 
 # Check if joblib is installed, and if not, install it
 try:
@@ -16,8 +16,6 @@ except ImportError:
 def load_models():
     models = {}
     models_directory = 'models'  # Models are saved in the 'models' directory adjacent to the Streamlit script
-
-    
 
     # Model file names
     model_file_names = [
@@ -33,7 +31,7 @@ def load_models():
     for model_file in model_file_names:
         model_path = f'models/{model_file}'
         # Check if the model file exists
-        if not (model_path):
+        if not os.path.exists(model_path):
             st.error(f"The model file '{model_path}' does not exist.")
             continue
 
@@ -50,6 +48,7 @@ def load_models():
     return models
 
 models = load_models()
+
 
 # ... (rest of the Streamlit app remains unchanged) ...
 
