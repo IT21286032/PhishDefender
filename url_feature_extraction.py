@@ -464,7 +464,6 @@ def featureExtraction(URL):
         features.append(1)  # Default to phishing if unable to get the web traffic
         print("Error in web_traffic")
 
-    features.append(dns)
 
     # HTML & Javascript based features
     try:
@@ -490,4 +489,4 @@ def featureExtraction(URL):
 feature_names = ['length_url', 'ip', 'nb_at', 'https_token', 'nb_subdomains',
        'prefix_suffix', 'shortening_service', 'nb_redirection',
        'nb_external_redirection', 'iframe', 'onmouseover', 'right_clic',
-       'web_traffic', 'dns_record', 'status']
+       'web_traffic', 'dns_record']
