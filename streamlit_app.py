@@ -8,7 +8,7 @@ import pandas as pd
 feature_names = ['length_url', 'ip', 'nb_at', 'https_token', 'nb_subdomains',
                  'prefix_suffix', 'shortening_service', 'nb_redirection',
                  'nb_external_redirection', 'iframe', 'onmouseover', 'right_clic',
-                 'web_traffic', 'dns_record', 'status']
+                 'web_traffic', 'dns_record']
 
 
 # Check if joblib is installed, and if not, install it
@@ -48,7 +48,7 @@ def load_models():
         # Load the model
         try:
             models[model_name] = joblib.load(model_path)
-            st.success(f"Successfully loaded model '{model_name}' from path '{model_path}'.")
+            #st.success(f"Successfully loaded model '{model_name}' from path '{model_path}'.")
         except Exception as e:
             st.error(f"Error loading model '{model_name}' from path '{model_path}': {e}")
 
