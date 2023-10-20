@@ -442,18 +442,12 @@ def featureExtraction(URL):
         features.append(0)
         print("Error in redirection")
 
-    
-    
-        
-
     try:
         response = requests.get(URL, timeout=10)
         features.append(forwarding(response))
     except:
         features.append(1)
         print("Error in forwarding")
-
-    
 
     # Domain based features
     dns = 1
@@ -462,7 +456,7 @@ def featureExtraction(URL):
         domain_name = whois.whois(urlparse(URL).netloc)
         dns = 0
     except Exception as e:
-        print(f"Error during WHOIS lookup: {e}")
+        print("Error during WHOIS lookup: {}".format(e))
 
     try:
         features.append(web_traffic(URL))
@@ -471,8 +465,20 @@ def featureExtraction(URL):
         print("Error in web_traffic")
 
     features.append(dns)
-    #features.append(1 if dns == 1 else domainAge(domain_name))
-    f#eatures.append(1 if dns == 1 else domainEnd(domain_name))
+
+    # If DNS lookup was successful, add domain age and end features
+    if domain_name:
+        try:
+            features.append(domainAge(domain_name))
+        except:
+            features.append(1)
+            print("Error in domainAge")
+
+        try:
+            features.append(domainEnd(domain_name))
+        except:
+            features.append(1)
+            print("Error in domainEnd")
 
     # HTML & Javascript based features
     try:
@@ -480,15 +486,14 @@ def featureExtraction(URL):
         features.append(iframe(response))
         features.append(mouseOver(response))
         features.append(rightClick(response))
-        features.append(web_traffic(response))
+        features.append(forwarding(response))
     except:
-        # If there's an error in fetching the URL, we'll use default phishing values for these features
+        # If there's an error in fetching the URL, use default phishing values for these features
         features.extend([1, 1, 1, 1])
         print("Error fetching the URL or extracting HTML & Javascript based features")
 
-    features.append(dns)
-
     return features
+
 
 
 
