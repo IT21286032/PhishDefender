@@ -10,12 +10,39 @@ def load_models():
     models = {}
     models_directory = 'models'  # Assuming models are saved in the 'models' directory in your repository
 
+    # Get the current directory where the Streamlit app script is located
+    current_directory = os.path.dirname(os.path.abspath(__file__))
+    models_directory_path = os.path.join(current_directory, models_directory)
+
+    # Model file names
+    model_file_names = [
+        'AutoEncoder_model.pkl',
+        'Decision_Tree_model.pkl',
+        'Multilayer_Perceptrons_model.pkl',
+        'Random_Forest_model.pkl',
+        'SVM_model.pkl',
+        'XGBoost_model.pkl'
+    ]
+
     # Load each model using joblib
-    for model_name in ['Decision Tree', 'Random Forest', 'Multilayer Perceptrons', 'XGBoost', 'SVM', 'AutoEncoder']:
-        model_path = f'{models_directory}/{model_name}_model.pkl'  # Path to the model file in the models directory
-        models[model_name] = joblib.load(model_path)
+    for model_file in model_file_names:
+        model_path = os.path.join(models_directory_path, model_file)  # Path to the model file in the models directory
+
+        # Check if the model file exists
+        if not os.path.exists(model_path):
+            raise FileNotFoundError(f"The model file '{model_path}' does not exist.")
+
+        # Extract model name from the file name (remove "_model.pkl" and convert spaces to underscores)
+        model_name = model_file.replace('_model.pkl', '').replace(' ', '_')
+
+        # Load the model
+        try:
+            models[model_name] = joblib.load(model_path)
+        except Exception as e:
+            raise RuntimeError(f"Error loading model '{model_name}': {e}")
 
     return models
+
 models = load_models()
 
 
