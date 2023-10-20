@@ -2,6 +2,8 @@ import streamlit as st
 import subprocess
 import os
 import joblib
+from url_feature_extraction import featureExtraction
+
 
 # Check if joblib is installed, and if not, install it
 try:
@@ -97,13 +99,15 @@ if st.button('Check!'):
     selected_model = models[choice]
 
     try:
-        # Perform the necessary processing and make predictions using the selected model
-        # (Replace this part with your actual processing logic using the selected model)
-        result = selected_model.predict(url)  # Replace 'url' with the processed input data
-        if result == 0:
+        # Extract features from the provided URL
+        extracted_features = [featureExtraction(url)]
+        
+        # Make predictions using the selected model with the extracted features
+        result = selected_model.predict(extracted_features)
+        
+        if result[0] == 0:
             st.success("This web page seems legitimate!")
         else:
             st.warning("Attention! This web page is a potential phishing site!")
     except Exception as e:
         st.error(f"An error occurred: {e}")
-
