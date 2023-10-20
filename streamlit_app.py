@@ -50,7 +50,7 @@ def load_models():
         try:
             models[model_name] = joblib.load(model_path)
 
-            st.success(f"Successfully loaded model '{model_name}' from path '{model_path}'.")
+            #st.success(f"Successfully loaded model '{model_name}' from path '{model_path}'.")
 
             #st.success(f"Successfully loaded model '{model_name}' from path '{model_path}'.")
 
