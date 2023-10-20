@@ -399,45 +399,51 @@ Create a list and a function that calls the other functions and stores all the f
 """
 
 #Function to extract features
-def featureExtraction(URL,""):
+import whois
+from urllib.parse import urlparse
+import requests
 
-  features = []
-  #Address bar based features (10)
+def featureExtraction(URL):
 
-  features.append(getLength(url))
-  features.append(havingIP(url))
-  features.append(haveAtSign(url))
-  features.append(httpDomain(url))
-  features.append(count_subdomains(url))
-  features.append(prefixSuffix(url))
-  features.append(tinyURL(url))
-  features.append(redirection(url))
+    features = []
 
+    # Address bar based features
+    features.append(getLength(URL))
+    features.append(havingIP(URL))
+    features.append(haveAtSign(URL))
+    features.append(httpDomain(URL))
+    features.append(count_subdomains(URL))
+    features.append(prefixSuffix(URL))
+    features.append(tinyURL(URL))
+    features.append(redirection(URL))
+    # At this point, there's no 'nb_external_redirection' feature in the functions you provided.
+    # Assuming an external function or method will provide this, adding a placeholder:
+    features.append(forwarding(response))  # Placeholder, replace with actual function/method
 
-  #Domain based features (4)
-  dns = 0
-  try:
-    domain_name = whois.whois(urlparse(url).netloc)
-  except:
-    dns = 1
+    # HTML & Javascript based features
+    try:
+        response = requests.get(URL)
+    except:
+        response = ""
+    features.append(iframe(response))
+    features.append(mouseOver(response))
+    features.append(rightClick(response))
+    features.append(forwarding(response))
 
-  features.append(dns)
-  features.append(web_traffic(url))
-  features.append(1 if dns == 1 else domainAge(domain_name))
-  features.append(1 if dns == 1 else domainEnd(domain_name))
+    # Domain based features
+    dns = 0
+    try:
+        domain_name = whois.whois(urlparse(URL).netloc)
+    except:
+        dns = 1
 
-  # HTML & Javascript based features (4)
-  try:
-    response = requests.get(url)
-  except:
-    response = ""
-  features.append(iframe(response))
-  features.append(mouseOver(response))
-  features.append(rightClick(response))
-  features.append(forwarding(response))
-  features.append(label)
+    features.append(web_traffic(URL))
+    features.append(dns)
+    features.append(1 if dns == 1 else domainAge(domain_name))
+    features.append(1 if dns == 1 else domainEnd(domain_name))
 
-  return features
+    return features
+
 
 #converting the list to dataframe
 feature_names = ['length_url', 'ip', 'nb_at', 'https_token', 'nb_subdomains',
