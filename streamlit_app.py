@@ -69,9 +69,8 @@ models = load_models()
 # ... (rest of the Streamlit app remains unchanged) ...
 
 
-st.title('Phishing Website Detection using Machine Learning')
-st.write('This ML-based app is developed for educational purposes. The objective of the app is detecting phishing websites only using content data. Not URL!'
-         ' You can see the details of the approach, dataset, and feature set if you click on _"See The Details"_. ')
+st.title('Phish Defender - Phishing Website Detection using Machine Learning')
+
 
 with st.expander("What is Phish Defender ?"):
     
