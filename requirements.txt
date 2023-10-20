@@ -1,5 +1,5 @@
 streamlit
 joblib
 keras
-sklearn
+scikit-learn
 xgboost
