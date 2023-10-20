@@ -69,7 +69,24 @@ models = load_models()
 # ... (rest of the Streamlit app remains unchanged) ...
 
 
-st.title('Phish Defender - Phishing Website Detection using Machine Learning')
+#st.title('Phish Defender - Phishing Website Detection using Machine Learning')
+st.markdown("""
+<style>
+    .header {
+        font-size: 48px;
+        color: #4A90E2;  /* Change to desired color */
+        font-weight: bold;
+        text-shadow: 2px 2px 4px #aaa;
+        text-align: center;
+        padding: 20px 0;
+    }
+</style>
+
+<div class="header">
+    Phish Defender <br>
+    <span style="font-size: 24px;">Phishing Website Detection using Machine Learning</span>
+</div>
+""", unsafe_allow_html=True)
 
 
 with st.expander("What is Phish Defender ?"):
