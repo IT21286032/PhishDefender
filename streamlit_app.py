@@ -92,10 +92,10 @@ with st.expander("PROJECT DETAILS:"):
     st.write('Data set was created in October 2022.')
 
 with st.expander('EXAMPLE PHISHING URLs:'):
-    st.write('_https://rtyu38.godaddysites.com/_')
-    st.write('_https://karafuru.invite-mint.com/_')
-    st.write('_https://defi-ned.top/h5/#/_')
-    st.caption('REMEMBER, PHISHING WEB PAGES HAVE SHORT LIFECYCLE! SO, THE EXAMPLES SHOULD BE UPDATED!')
+    st.write('_https://faceebook-com.bugs3.com/login/Secured_Re-login/index1.html_')
+    st.write('_login[.]microsoftonline.ccisystems[.]us_')
+    st.write('_https://jwqgvofh.site/keells-bx/? t=1618650506429_')
+    st.caption('REMEMBER, PHISHING WEB PAGES HAVE SHORT LIFECYCLE! )
     
 # User selects a model
 choice = st.selectbox("Please select your machine learning model",
