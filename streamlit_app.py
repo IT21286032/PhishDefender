@@ -88,7 +88,7 @@ with st.expander('EXAMPLE PHISHING URLs:'):
 choice = st.selectbox("Please select your machine learning model",
                      ['Decision Tree', 'Random Forest', 'Multilayer Perceptrons', 'XGBoost', 'SVM', 'AutoEncoder'])
 
-print("Selected Choice:", choice)
+st.write(f'{choice} is selected')
 
 # Check if a URL is phishing or legitimate
 url = st.text_input('Enter the URL')
