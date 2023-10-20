@@ -68,11 +68,6 @@ models = load_models()
 st.title('Phish Defender: Shielding You from Phishing Threats')
 
 
-<div class="header">
-    PhishGuardian <br>
-    <span style="font-size: 20px;">Phish Defender -Shielding You from Phishing with Machine Intelligence</span>
-</div>
-""", unsafe_allow_html=True)
 
 
 with st.expander("What is Phish Defender ?"):
