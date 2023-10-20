@@ -90,9 +90,8 @@ Enjoy your safe browsing!
 """)
 
     st.subheader('Data set')
-    st.write('I used _"phishtank.org"_ & _"tranco-list.eu"_ as data sources.')
-    st.write('Totally 26584 websites ==> **_16060_ legitimate** websites | **_10524_ phishing** websites')
-    st.write('Data set was created in October 2022.')
+    st.write('Dataset Link- _"https://www.kaggle.com/datasets/shashwatwork/web-page-phishing-detection-dataset/data"_ ')
+    st.write('Data set was updated last in  2022.')
 
 with st.expander('EXAMPLE PHISHING URLs:'):
     st.write('_https://faceebook-com.bugs3.com/login/Secured_Re-login/index1.html_')
