@@ -20,6 +20,8 @@ def load_models():
         models[model_name] = joblib.load(model_path)
 
     return models
+models = load_models()
+
 
 st.title('Phishing Website Detection using Machine Learning')
 st.write('This ML-based app is developed for educational purposes. The objective of the app is detecting phishing websites only using content data. Not URL!'
