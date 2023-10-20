@@ -400,7 +400,7 @@ Create a list and a function that calls the other functions and stores all the f
 """
 
 #Function to extract features
-def featureExtraction(url,status):
+def featureExtraction(URL,""):
 
   features = []
   #Address bar based features (10)
