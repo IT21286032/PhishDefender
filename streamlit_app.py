@@ -12,7 +12,7 @@ except ImportError:
     subprocess.check_call(["pip", "install", "joblib"])
     st.write("joblib installed successfully. Please restart the app.")
 
-# Function to load models from the models directory
+# Function to load models from the models directory with added debugging information
 def load_models():
     models = {}
     models_directory = 'models'  # Models are saved in the 'models' directory adjacent to the Streamlit script
@@ -37,20 +37,26 @@ def load_models():
 
         # Check if the model file exists
         if not os.path.exists(model_path):
-            raise FileNotFoundError(f"The model file '{model_path}' does not exist.")
+            st.error(f"The model file '{model_path}' does not exist.")
+            continue
 
         # Extract model name from the file name (remove "_model.pkl" and convert underscores to spaces)
-        model_name = model_file.replace('_model.pkl', '').replace('_', ' ')
+        model_name = model_file.replace('_model.pkl', '')
 
         # Load the model
         try:
             models[model_name] = joblib.load(model_path)
+            st.success(f"Successfully loaded model '{model_name}' from path '{model_path}'.")
         except Exception as e:
-            raise RuntimeError(f"Error loading model '{model_name}': {e}")
+            st.error(f"Error loading model '{model_name}' from path '{model_path}': {e}")
 
     return models
 
 models = load_models()
+
+# ... (rest of the Streamlit app remains unchanged) ...
+
+
 
 # ... (rest of the Streamlit app remains unchanged) ...
 
