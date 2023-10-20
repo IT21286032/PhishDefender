@@ -28,7 +28,6 @@ def load_models():
 
     # Model file names
     model_file_names = [
-        'Auto1Encoder_model.pkl',
         'Decision Tree_model.pkl',
         'Multilayer Perceptrons_model.pkl',
         'Random Forest_model.pkl',
@@ -100,7 +99,7 @@ with st.expander('EXAMPLE PHISHING URLs:'):
     
 # User selects a model
 choice = st.selectbox("Please select your machine learning model",
-                     ['Decision Tree', 'Random Forest', 'Multilayer Perceptrons', 'XGBoost', 'SVM', 'AutoEncoder'])
+                     ['Decision Tree', 'Random Forest', 'Multilayer Perceptrons', 'XGBoost', 'SVM'])
 
 st.write(f'{choice} is selected')
 
