@@ -1,6 +1,7 @@
 import streamlit as st
 import subprocess
 import os
+import joblib
 
 # Check if joblib is installed, and if not, install it
 try:
