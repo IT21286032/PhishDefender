@@ -105,7 +105,7 @@ choice = st.selectbox("Please select your machine learning model",
 st.write(f'{choice} is selected')
 
 # Check if a URL is phishing or legitimate
-<
+
 
 
 
