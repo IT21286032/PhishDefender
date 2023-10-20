@@ -132,7 +132,7 @@ if st.button('Check!'):
         else:
             st.warning("Attention! This web page is a potential phishing site!")
     except Exception as e:
-<<<<<<< HEAD
+
         st.error(f"An error occurred: {e}")
 
         st.error(f"An error occurred while processing the URL: {e}")
