@@ -51,7 +51,7 @@ with st.expander('EXAMPLE PHISHING URLs:'):
     
 # User selects a model
 choice = st.selectbox("Please select your machine learning model",
-                     ['Gaussian Naive Bayes', 'Support Vector Machine', 'Decision Tree', 'Random Forest', 'AdaBoost', 'Neural Network', 'K-Neighbours'])
+                     ['Decision Tree', 'Random Forest', 'Multilayer Perceptrons', 'XGBoost', 'SVM', 'AutoEncoder'])
 
 # Check if a URL is phishing or legitimate
 url = st.text_input('Enter the URL')
