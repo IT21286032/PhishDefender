@@ -6,3 +6,15 @@ xgboost
 tensorflow
 
 scikit-learn==0.24.2
+<<<<<<< HEAD
+=======
+
+
+pandas
+urllib3
+ipaddress
+beautifulsoup4
+python-whois
+requests
+
+>>>>>>> 1f679ad0d47e6bb5d815cfb7443d56560382e118

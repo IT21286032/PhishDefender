@@ -2,6 +2,17 @@ import streamlit as st
 import subprocess
 import os
 import joblib
+<<<<<<< HEAD
+=======
+from url_feature_extraction import featureExtraction
+import pandas as pd
+
+feature_names = ['length_url', 'ip', 'nb_at', 'https_token', 'nb_subdomains',
+                 'prefix_suffix', 'shortening_service', 'nb_redirection',
+                 'nb_external_redirection', 'iframe', 'onmouseover', 'right_clic',
+                 'web_traffic', 'dns_record']
+
+>>>>>>> 1f679ad0d47e6bb5d815cfb7443d56560382e118
 
 # Check if joblib is installed, and if not, install it
 try:
@@ -40,7 +51,11 @@ def load_models():
         # Load the model
         try:
             models[model_name] = joblib.load(model_path)
+<<<<<<< HEAD
             st.success(f"Successfully loaded model '{model_name}' from path '{model_path}'.")
+=======
+            #st.success(f"Successfully loaded model '{model_name}' from path '{model_path}'.")
+>>>>>>> 1f679ad0d47e6bb5d815cfb7443d56560382e118
         except Exception as e:
             st.error(f"Error loading model '{model_name}' from path '{model_path}': {e}")
 
@@ -91,19 +106,37 @@ choice = st.selectbox("Please select your machine learning model",
 st.write(f'{choice} is selected')
 
 # Check if a URL is phishing or legitimate
+<<<<<<< HEAD
+=======
+
+
+
+
+# Check if a URL is phishing or legitimate
+>>>>>>> 1f679ad0d47e6bb5d815cfb7443d56560382e118
 url = st.text_input('Enter the URL')
 if st.button('Check!'):
     # Load the selected model
     selected_model = models[choice]
 
     try:
+<<<<<<< HEAD
         # Perform the necessary processing and make predictions using the selected model
         # (Replace this part with your actual processing logic using the selected model)
         result = selected_model.predict(url)  # Replace 'url' with the processed input data
+=======
+        url_features = featureExtraction(url)
+        df = pd.DataFrame([url_features], columns=feature_names)
+        result = selected_model.predict(df)
+>>>>>>> 1f679ad0d47e6bb5d815cfb7443d56560382e118
         if result == 0:
             st.success("This web page seems legitimate!")
         else:
             st.warning("Attention! This web page is a potential phishing site!")
     except Exception as e:
+<<<<<<< HEAD
         st.error(f"An error occurred: {e}")
 
+=======
+        st.error(f"An error occurred while processing the URL: {e}")
+>>>>>>> 1f679ad0d47e6bb5d815cfb7443d56560382e118
