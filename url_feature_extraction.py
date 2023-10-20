@@ -209,7 +209,6 @@ Many features can be extracted that come under this category. Out of them, below
 Each of these features are explained and the coded below:
 """
 
-!pip install python-whois
 
 # importing required packages for this section
 import re
