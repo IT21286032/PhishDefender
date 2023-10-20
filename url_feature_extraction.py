@@ -421,13 +421,16 @@ def featureExtraction(URL):
     features.append(redirection(URL))
     # At this point, there's no 'nb_external_redirection' feature in the functions you provided.
     # Assuming an external function or method will provide this, adding a placeholder:
-    features.append(forwarding(response))  # Placeholder, replace with actual function/method
-
-    # HTML & Javascript based features
+    
+	
     try:
         response = requests.get(URL)
     except:
         response = ""
+    features.append(forwarding(response))  # Placeholder, replace with actual function/method
+
+    # HTML & Javascript based features
+    
     features.append(iframe(response))
     features.append(mouseOver(response))
     features.append(rightClick(response))
