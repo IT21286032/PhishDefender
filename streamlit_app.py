@@ -124,7 +124,8 @@ if st.button('Check!'):
         result = selected_model.predict(url)  # Replace 'url' with the processed input data
 
         url_features = featureExtraction(url)
-        df = pd.DataFrame([url_features], columns=feature_names)
+        df = pd.DataFrame([url_features], columns=feature_names).reshape(1, -1)
+
         result = selected_model.predict(df)
 
         if result == 0:
