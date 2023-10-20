@@ -1,6 +1,8 @@
 streamlit
 joblib
 keras
-scikit-learn
+
 xgboost
 tensorflow
+
+scikit-learn==0.24.2
