@@ -62,15 +62,10 @@ def load_models():
 models = load_models()
 
 
-# ... (rest of the Streamlit app remains unchanged) ...
-
-
-
-# ... (rest of the Streamlit app remains unchanged) ...
 
 
 #st.title('Phish Defender - Phishing Website Detection using Machine Learning')
-st.markdown("""
+st.title("""
 <style>
     .header {
         font-size: 48px;
