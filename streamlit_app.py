@@ -1,14 +1,21 @@
+
 import streamlit as st
 import subprocess
 import os
+#from Refactored_Feature_extraction_Kajee import extract_features
 
 # Check if joblib is installed, and if not, install it
-
+try:
+    import joblib
+except ImportError:
+    st.write("Installing joblib...")
+    subprocess.check_call(["pip", "install", "joblib"])
+    st.write("joblib installed successfully. Please restart the app.")
 
 # Function to load models from the models directory
 def load_models():
     models = {}
-    models_directory = 'models'  # Assuming models are saved in the 'models' directory in your repository
+    models_directory = 'models'  # Models are saved in the 'models' directory adjacent to the Streamlit script
 
     # Get the current directory where the Streamlit app script is located
     current_directory = os.path.dirname(os.path.abspath(__file__))
@@ -32,8 +39,8 @@ def load_models():
         if not os.path.exists(model_path):
             raise FileNotFoundError(f"The model file '{model_path}' does not exist.")
 
-        # Extract model name from the file name (remove "_model.pkl" and convert spaces to underscores)
-        model_name = model_file.replace('_model.pkl', '').replace(' ', '_')
+        # Extract model name from the file name (remove "_model.pkl" and convert underscores to spaces)
+        model_name = model_file.replace('_model.pkl', '').replace('_', ' ')
 
         # Load the model
         try:
@@ -44,6 +51,8 @@ def load_models():
     return models
 
 models = load_models()
+
+# ... (rest of the Streamlit app remains unchanged) ...
 
 
 st.title('Phishing Website Detection using Machine Learning')
