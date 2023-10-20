@@ -17,9 +17,7 @@ def load_models():
     models = {}
     models_directory = 'models'  # Models are saved in the 'models' directory adjacent to the Streamlit script
 
-    # Get the current directory where the Streamlit app script is located
-    current_directory = os.path.dirname(os.path.abspath(__file__))
-    models_directory_path = os.path.join(current_directory, models_directory)
+    
 
     # Model file names
     model_file_names = [
