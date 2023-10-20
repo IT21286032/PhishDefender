@@ -3,6 +3,7 @@ import subprocess
 import os
 import joblib
 from url_feature_extraction import featureExtraction
+import pandas as pd
 
 
 # Check if joblib is installed, and if not, install it
