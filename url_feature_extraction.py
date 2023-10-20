@@ -239,18 +239,18 @@ If the rank of the domain < 100000, the vlaue of this feature is 1 (phishing) el
 
 # 12.Web traffic (Web_Traffic)
 def web_traffic(url):
-  try:
-    #Filling the whitespaces in the URL if any
-    url = urllib.parse.quote(url)
-    rank = BeautifulSoup(urllib.request.urlopen("http://data.alexa.com/data?cli=10&dat=s&url=" + url).read(), "xml").find(
-        "REACH")['RANK']
-    rank = int(rank)
-  except TypeError:
+    try:
+        # Using requests instead of urllib for better error handling
+        response = requests.get("http://data.alexa.com/data?cli=10&dat=s&url=" + url, timeout=10)
+        rank = BeautifulSoup(response.text, "xml").find("REACH")['RANK']
+        rank = int(rank)
+    except (TypeError, ValueError, requests.RequestException) as e:
+        print(f"Error during web traffic check for URL {url}: {e}")
+        return 1  # Default to phishing if unable to get the web traffic
+    if rank < 100000:
         return 1
-  if rank <100000:
-    return 1
-  else:
-    return 0
+    else:
+        return 0
 
 """#### **3.2.3. Age of Domain**
 
@@ -261,25 +261,17 @@ If age of domain > 12 months, the vlaue of this feature is 1 (phishing) else 0 (
 
 # 13.Survival time of domain: The difference between termination time and creation time (Domain_Age)
 def domainAge(domain_name):
-  creation_date = domain_name.creation_date
-  expiration_date = domain_name.expiration_date
-  if (isinstance(creation_date,str) or isinstance(expiration_date,str)):
     try:
-      creation_date = datetime.strptime(creation_date,'%Y-%m-%d')
-      expiration_date = datetime.strptime(expiration_date,"%Y-%m-%d")
-    except:
-      return 1
-  if ((expiration_date is None) or (creation_date is None)):
-      return 1
-  elif ((type(expiration_date) is list) or (type(creation_date) is list)):
-      return 1
-  else:
-    ageofdomain = abs((expiration_date - creation_date).days)
-    if ((ageofdomain/30) < 6):
-      age = 1
-    else:
-      age = 0
-  return age
+        creation_date = domain_name.creation_date
+        expiration_date = domain_name.expiration_date
+        if isinstance(creation_date, str) or isinstance(expiration_date, str):
+            creation_date = datetime.strptime(creation_date, '%Y-%m-%d')
+            expiration_date = datetime.strptime(expiration_date, "%Y-%m-%d")
+        ageofdomain = abs((expiration_date - creation_date).days)
+        return 0 if (ageofdomain/30) >= 6 else 1
+    except Exception as e:
+        print(f"Error during domain age check: {e}")
+        return 1  # Default to phishing if unable to get domain age
 
 """#### **3.2.4. End Period of Domain**
 
@@ -290,24 +282,16 @@ If end period of domain > 6 months, the vlaue of this feature is 1 (phishing) el
 
 # 14.End time of domain: The difference between termination time and current time (Domain_End)
 def domainEnd(domain_name):
-  expiration_date = domain_name.expiration_date
-  if isinstance(expiration_date,str):
     try:
-      expiration_date = datetime.strptime(expiration_date,"%Y-%m-%d")
-    except:
-      return 1
-  if (expiration_date is None):
-      return 1
-  elif (type(expiration_date) is list):
-      return 1
-  else:
-    today = datetime.now()
-    end = abs((expiration_date - today).days)
-    if ((end/30) < 6):
-      end = 0
-    else:
-      end = 1
-  return end
+        expiration_date = domain_name.expiration_date
+        if isinstance(expiration_date, str):
+            expiration_date = datetime.strptime(expiration_date, "%Y-%m-%d")
+        today = datetime.now()
+        end = abs((expiration_date - today).days)
+        return 0 if (end/30) >= 6 else 1
+    except Exception as e:
+        print(f"Error during domain end check: {e}")
+        return 1  # Default to phishing if unable to get domain end
 
 """## **3.3. HTML and JavaScript based Features**
 
@@ -419,34 +403,37 @@ def featureExtraction(URL):
     features.append(prefixSuffix(URL))
     features.append(tinyURL(URL))
     features.append(redirection(URL))
-    # At this point, there's no 'nb_external_redirection' feature in the functions you provided.
-    # Assuming an external function or method will provide this, adding a placeholder:
     
-	
-    try:
-        response = requests.get(URL)
-    except:
-        response = ""
-    features.append(forwarding(response))  # Placeholder, replace with actual function/method
-
-    # HTML & Javascript based features
-    
-    features.append(iframe(response))
-    features.append(mouseOver(response))
-    features.append(rightClick(response))
-    features.append(forwarding(response))
-
     # Domain based features
-    dns = 0
+    dns = 1
     try:
         domain_name = whois.whois(urlparse(URL).netloc)
-    except:
-        dns = 1
+        dns = 0
+    except Exception as e:
+        print(f"Error during WHOIS lookup: {e}")
 
-    features.append(web_traffic(URL))
+    # Check web traffic
+    try:
+        traffic = web_traffic(URL)
+    except Exception as e:
+        print(f"Error during web traffic check: {e}")
+        traffic = 1  # Default to phishing if unable to get the web traffic
+
+    features.append(traffic)
     features.append(dns)
     features.append(1 if dns == 1 else domainAge(domain_name))
     features.append(1 if dns == 1 else domainEnd(domain_name))
+
+    # HTML & Javascript based features
+    try:
+        response = requests.get(URL, timeout=10)
+        features.append(iframe(response))
+        features.append(mouseOver(response))
+        features.append(rightClick(response))
+        features.append(forwarding(response))
+    except Exception as e:
+        print(f"Error fetching the URL: {e}")
+        features.extend([1, 1, 1, 1])  # Default values for these features in case of error
 
     return features
 
