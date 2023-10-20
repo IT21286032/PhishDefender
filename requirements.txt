@@ -3,3 +3,4 @@ joblib
 keras
 scikit-learn
 xgboost
+tensorflow
