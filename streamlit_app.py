@@ -31,10 +31,10 @@ def load_models():
 
     # Load each model using joblib
     for model_file in model_file_names:
-        model_path = os.path.join(models_directory_path, model_file)  # Path to the model file in the models directory
+        model_path = 'models/model_file'
 
         # Check if the model file exists
-        if not os.path.exists(model_path):
+        if not (model_path):
             st.error(f"The model file '{model_path}' does not exist.")
             continue
 
