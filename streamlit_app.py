@@ -41,7 +41,7 @@ def load_models():
             continue
 
         # Extract model name from the file name (remove "_model.pkl" and convert underscores to spaces)
-        model_name = model_file.replace('_model.pkl', '')
+        model_name = model_file.replace('_model.pkl', '').replace('_', ' ')
 
         # Load the model
         try:
