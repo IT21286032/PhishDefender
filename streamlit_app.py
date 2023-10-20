@@ -70,23 +70,3 @@ if st.button('Check!'):
     except Exception as e:
         st.error(f"An error occurred: {e}")
 
-choice = st.selectbox("Please select your machine learning model",
-                        ['Decision Tree', 'Random Forest', 'Multilayer Perceptrons', 'XGBoost', 'SVM', 'AutoEncoder'])
-
-
-# Check if a URL is phishing or legitimate
-url = st.text_input('Enter the URL')
-if st.button('Check!'):
-    # Load the selected model
-    selected_model = models[choice]
-
-    try:
-        # Perform the necessary processing and make predictions using the selected model
-        # (Replace this part with your actual processing logic using the selected model)
-        result = selected_model.predict(url)  # Replace 'url' with the processed input data
-        if result == 0:
-            st.success("This web page seems legitimate!")
-        else:
-            st.warning("Attention! This web page is a potential phishing site!")
-    except Exception as e:
-        st.error(f"An error occurred: {e}")
