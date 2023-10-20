@@ -391,38 +391,88 @@ from urllib.parse import urlparse
 import requests
 
 def featureExtraction(URL):
-
     features = []
 
     # Address bar based features
-    features.append(getLength(URL))
-    features.append(havingIP(URL))
-    features.append(haveAtSign(URL))
-    features.append(httpDomain(URL))
-    features.append(count_subdomains(URL))
-    features.append(prefixSuffix(URL))
-    features.append(tinyURL(URL))
-    features.append(redirection(URL))
+    try:
+        features.append(getLength(URL))
+    except:
+        features.append(0)
+        print("Error in getLength")
+
+    try:
+        features.append(havingIP(URL))
+    except:
+        features.append(0)
+        print("Error in havingIP")
+
+    try:
+        features.append(haveAtSign(URL))
+    except:
+        features.append(0)
+        print("Error in haveAtSign")
+
+    try:
+        features.append(httpDomain(URL))
+    except:
+        features.append(0)
+        print("Error in httpDomain")
+
+    try:
+        features.append(count_subdomains(URL))
+    except:
+        features.append(0)
+        print("Error in count_subdomains")
+
+    try:
+        features.append(prefixSuffix(URL))
+    except:
+        features.append(0)
+        print("Error in prefixSuffix")
+
+    try:
+        features.append(tinyURL(URL))
+    except:
+        features.append(0)
+        print("Error in tinyURL")
+
+    try:
+        features.append(redirection(URL))
+    except:
+        features.append(0)
+        print("Error in redirection")
+
     
+    
+        
+
+    try:
+        response = requests.get(URL, timeout=10)
+        features.append(forwarding(response))
+    except:
+        features.append(1)
+        print("Error in forwarding")
+
+    
+
     # Domain based features
     dns = 1
+    domain_name = None
     try:
         domain_name = whois.whois(urlparse(URL).netloc)
         dns = 0
     except Exception as e:
         print(f"Error during WHOIS lookup: {e}")
 
-    # Check web traffic
     try:
-        traffic = web_traffic(URL)
-    except Exception as e:
-        print(f"Error during web traffic check: {e}")
-        traffic = 1  # Default to phishing if unable to get the web traffic
+        features.append(web_traffic(URL))
+    except:
+        features.append(1)  # Default to phishing if unable to get the web traffic
+        print("Error in web_traffic")
 
-    features.append(traffic)
     features.append(dns)
-    features.append(1 if dns == 1 else domainAge(domain_name))
-    features.append(1 if dns == 1 else domainEnd(domain_name))
+    #features.append(1 if dns == 1 else domainAge(domain_name))
+    f#eatures.append(1 if dns == 1 else domainEnd(domain_name))
 
     # HTML & Javascript based features
     try:
@@ -430,12 +480,16 @@ def featureExtraction(URL):
         features.append(iframe(response))
         features.append(mouseOver(response))
         features.append(rightClick(response))
-        features.append(forwarding(response))
-    except Exception as e:
-        print(f"Error fetching the URL: {e}")
-        features.extend([1, 1, 1, 1])  # Default values for these features in case of error
+        features.append(web_traffic(response))
+    except:
+        # If there's an error in fetching the URL, we'll use default phishing values for these features
+        features.extend([1, 1, 1, 1])
+        print("Error fetching the URL or extracting HTML & Javascript based features")
+
+    features.append(dns)
 
     return features
+
 
 
 #converting the list to dataframe
