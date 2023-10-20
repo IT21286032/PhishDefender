@@ -64,18 +64,9 @@ models = load_models()
 
 
 
-#st.title('Phish Defender - Phishing Website Detection using Machine Learning')
-st.title("""
-<style>
-    .header {
-        font-size: 48px;
-        color: #4A90E2;  /* Change to desired color */
-        font-weight: bold;
-        text-shadow: 2px 2px 4px #aaa;
-        text-align: center;
-        padding: 20px 0;
-    }
-</style>
+
+st.title('Phish Defender: Shielding You from Phishing Threats')
+
 
 <div class="header">
     PhishGuardian <br>
