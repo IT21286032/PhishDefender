@@ -83,8 +83,8 @@ st.markdown("""
 </style>
 
 <div class="header">
-    Phish Defender <br>
-    <span style="font-size: 24px;">Phishing Website Detection using Machine Learning</span>
+    PhishGuardian <br>
+    <span style="font-size: 20px;">Phish Defender -Shielding You from Phishing with Machine Intelligence</span>
 </div>
 """, unsafe_allow_html=True)
 
