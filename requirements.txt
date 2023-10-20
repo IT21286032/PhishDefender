@@ -8,6 +8,14 @@ tensorflow
 scikit-learn==0.24.2
 whois
 
+
+
+
+numpy
+sklearn
+matplotlib
+
+
 pandas
 urllib3
 ipaddress
