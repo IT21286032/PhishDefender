@@ -1,2 +1,5 @@
 streamlit
 joblib
+keras
+sklearn
+xgboost
