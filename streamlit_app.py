@@ -95,7 +95,7 @@ with st.expander('EXAMPLE PHISHING URLs:'):
     st.write('_https://faceebook-com.bugs3.com/login/Secured_Re-login/index1.html_')
     st.write('_login[.]microsoftonline.ccisystems[.]us_')
     st.write('_https://jwqgvofh.site/keells-bx/? t=1618650506429_')
-    st.caption('REMEMBER, PHISHING WEB PAGES HAVE SHORT LIFECYCLE! )
+    st.caption('REMEMBER, PHISHING WEB PAGES HAVE SHORT LIFECYCLE!' )
     
 # User selects a model
 choice = st.selectbox("Please select your machine learning model",
