@@ -1,13 +1,9 @@
 import streamlit as st
 import subprocess
+import os
 
 # Check if joblib is installed, and if not, install it
-try:
-    import joblib
-except ImportError:
-    st.write("Installing joblib...")
-    subprocess.check_call(["pip", "install", "joblib"])
-    st.write("joblib installed successfully. Please restart the app.")
+
 
 # Function to load models from the models directory
 def load_models():
