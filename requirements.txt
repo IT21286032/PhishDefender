@@ -6,6 +6,7 @@ xgboost
 tensorflow
 
 scikit-learn==0.24.2
+whois
 
 pandas
 urllib3
