@@ -18,6 +18,9 @@ A phishing website is a common social engineering method that mimics trustful un
 
 #importing required packages for this module
 import pandas as pd
+import whois
+from urllib.parse import urlparse
+import requests
 
 """# **3. Feature Extraction:**
 
