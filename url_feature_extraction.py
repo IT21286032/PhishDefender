@@ -456,7 +456,7 @@ def featureExtraction(URL):
         domain_name = whois.whois(urlparse(URL).netloc)
         dns = 0
     except Exception as e:
-        print("Error during WHOIS lookup: {}".format(e))
+        print(f"Error during WHOIS lookup: {e}")
 
     try:
         features.append(web_traffic(URL))
@@ -466,33 +466,22 @@ def featureExtraction(URL):
 
     features.append(dns)
 
-    # If DNS lookup was successful, add domain age and end features
-    if domain_name:
-        try:
-            features.append(domainAge(domain_name))
-        except:
-            features.append(1)
-            print("Error in domainAge")
-
-        try:
-            features.append(domainEnd(domain_name))
-        except:
-            features.append(1)
-            print("Error in domainEnd")
-
     # HTML & Javascript based features
     try:
         response = requests.get(URL, timeout=10)
         features.append(iframe(response))
         features.append(mouseOver(response))
         features.append(rightClick(response))
-        features.append(forwarding(response))
     except:
         # If there's an error in fetching the URL, use default phishing values for these features
-        features.extend([1, 1, 1, 1])
+        features.extend([1, 1, 1])
         print("Error fetching the URL or extracting HTML & Javascript based features")
 
+    features.append(dns)
+
     return features
+
+
 
 
 
