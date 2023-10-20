@@ -124,7 +124,7 @@ if st.button('Check!'):
         # Ensure the extracted features match the expected number of features
         if len(url_features) != len(feature_names):
             st.error(f"Feature mismatch! Expected {len(feature_names)} features but got {len(url_features)}")
-            return
+            st.stop()  # Stop execution
         
         # Convert to DataFrame
         df = pd.DataFrame([url_features], columns=feature_names)
@@ -138,3 +138,4 @@ if st.button('Check!'):
             st.warning("Attention! This web page is a potential phishing site!")
     except Exception as e:
         st.error(f"An error occurred while processing the URL: {e}")
+
