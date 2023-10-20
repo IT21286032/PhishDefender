@@ -5,6 +5,11 @@ import joblib
 from url_feature_extraction import featureExtraction
 import pandas as pd
 
+feature_names = ['length_url', 'ip', 'nb_at', 'https_token', 'nb_subdomains',
+                 'prefix_suffix', 'shortening_service', 'nb_redirection',
+                 'nb_external_redirection', 'iframe', 'onmouseover', 'right_clic',
+                 'web_traffic', 'dns_record', 'status']
+
 
 # Check if joblib is installed, and if not, install it
 try:
@@ -95,10 +100,7 @@ st.write(f'{choice} is selected')
 
 # Check if a URL is phishing or legitimate
 
-feature_names = ['length_url', 'ip', 'nb_at', 'https_token', 'nb_subdomains',
-                 'prefix_suffix', 'shortening_service', 'nb_redirection',
-                 'nb_external_redirection', 'iframe', 'onmouseover', 'right_clic',
-                 'web_traffic', 'dns_record', 'status']
+
 
 
 # Check if a URL is phishing or legitimate
@@ -108,15 +110,12 @@ if st.button('Check!'):
     selected_model = models[choice]
 
     try:
-        # Extract features from the provided URL
         url_features = featureExtraction(url)
         df = pd.DataFrame([url_features], columns=feature_names)
-        
-        # Predict using the selected model
-        result = selected_model.predict(df)  
+        result = selected_model.predict(df)
         if result == 0:
             st.success("This web page seems legitimate!")
         else:
             st.warning("Attention! This web page is a potential phishing site!")
     except Exception as e:
-        st.error(f"An error occurred: {e}")
+        st.error(f"An error occurred while processing the URL: {e}")
