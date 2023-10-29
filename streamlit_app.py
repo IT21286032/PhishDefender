@@ -94,7 +94,7 @@ Enjoy your safe browsing!
 with st.expander('EXAMPLE PHISHING URLs:'):
     st.markdown('_[https://faceebook-com.bugs3.com/login/Secured_Re-login/index@1.html](https://faceebook-com.bugs3.com/login/Secured_Re-login/index@1.html)_')
     st.markdown('_[login.microsoftonline.ccisystems.us](https://login.microsoftonline.ccisystems.us)_')
-    st.markdown('_[https://jwqgvofh.site/keells@-bx/? t=1618650506429](https://jwqgvofh.site/keells@-bx/? t=1618650506429)_')
+    st.markdown('_[https://jwqgvofh.site/keells@-bx/? t=1618650506429]_')
     st.caption('REMEMBER, PHISHING WEB PAGES HAVE SHORT LIFECYCLE!')
 
 
