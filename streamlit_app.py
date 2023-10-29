@@ -92,10 +92,19 @@ Enjoy your safe browsing!
     st.write('Data set was updated last in  2022.')
 
 with st.expander('EXAMPLE PHISHING URLs:'):
-    st.write('_https://faceebook-com.bugs3.com/login/Secured_Re-login/index1.html_')
-    st.write('_login[.]microsoftonline.ccisystems[.]us_')
-    st.write('_https://jwqgvofh.site/keells-bx/? t=1618650506429_')
+    st.write('_https://faceebook-com.bugs3.com/login/Secured_Re-login/index@1.html_')
+    st.write('_login[.]microsoftonline.@ccisystems[.]us_')
+    st.write('_https://jwqgvofh.site/keells@-bx/? t=1618650506429_')
     st.caption('REMEMBER, PHISHING WEB PAGES HAVE SHORT LIFECYCLE!' )
+
+with st.expander('Accuracy of Each Machine Learning model'):
+    st.write('Decision Tree- 75 %')
+    st.write('Random Forest- 78 %')
+    st.write('Multilayer Perceptrons- 80 %')
+    st.write('XGBoost- 78 %')
+    st.write('SVM- 76 % ')
+    st.caption('You can choose a model and enter a URL to check the legitmacy')
+
     
 # User selects a model
 choice = st.selectbox("Please select your machine learning model",
