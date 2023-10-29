@@ -8,7 +8,6 @@ Original file is located at
 
 # **Phishing Website Detection Feature Extraction**
 
-*Final project of AI & Cybersecurity Course*
 
 # **1. Objective:**
 A phishing website is a common social engineering method that mimics trustful uniform resource locators (URLs) and webpages. The objective of this notebook is to collect data & extract the selctive features form the URLs.
