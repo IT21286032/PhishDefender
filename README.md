@@ -1,6 +1,6 @@
 # PhishDefender
 
-[Link Text](https://phishdefender.streamlit.app/)
+[https://phishdefender.streamlit.app/]
 
 PhishDefender is a web application developed to detect phishing websites using Machine Learning techniques. This application is designed to help users identify potentially harmful websites and protect themselves from online phishing threats. The application analyzes the content of a given website and classifies it as either legitimate or phishing based on the patterns identified by Machine Learning models.
 
